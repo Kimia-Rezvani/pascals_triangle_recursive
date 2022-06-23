@@ -1,0 +1,152 @@
+
+#  Application: Pascals Triangle Recursive
+#  Description: This application creates Pascals Triangle using the recursive algorithm
+#  Timing:  Runtime each line is accessed.
+#  Big O Analysis: Linear O(n^2) for a line
+#                  Each search m limes
+#                  O (n^2*m)
+#  Development Environment:  PyCharm 2012.2 Community Edition
+#  Version: Python 3.9
+
+import timeit
+
+
+def lab_4():
+
+    def pasc_tri(n):
+
+        pasc_list = []  # create list
+        if n == 0:  # checks if value is 0
+            pasc_list.append([1])  # adds 1 to list
+            return pasc_list  # returns list
+
+        if n == 1:  # checks if value is 1
+            pasc_list.append([1])  # adds 1 to list
+            pasc_list.append([1, 1])  # adds 1,1 to list
+            return pasc_list  # returns list
+
+        else:
+            new_row = [1]  # assigns value to variable new_row
+            final = pasc_tri(n - 1)  # Recursive call & assigns recursive call to final
+            last_row = final[-1]  # take from end of final previous row
+            for k in range(len(last_row) - 1):  # iterates over last row -1 and appends values
+                new_row.append(last_row[k] + last_row[k + 1])  # adding two middle values from  row above to new row
+            new_row.append(1)  # appends 1 to the end of new row created
+
+            final.append(new_row)  # appends new row to result for recursive
+
+            return final #returns Pascals triangle in one line
+
+
+    def pasc_print():
+
+        starttime = timeit.default_timer() #start timer
+        print("The start time is  :", starttime)
+        for i in range (7):
+
+            row_print_pretty = pasc_tri(i)
+
+            print()
+            print(f"Pascal's triangle for {i} line(s):")
+
+            for line in row_print_pretty:
+
+                print(line)
+            print(f"The total time for  {i} line(s) is  {timeit.default_timer() - starttime}") #end time
+
+
+
+
+    pasc_print() # call function
+    print()
+    starttime = timeit.default_timer() #start time
+    print("The start time is for 12 lines:", starttime)  # start timer
+    name_print_pretty = pasc_tri(12) #call function
+    print()
+    print(f"Pascal's triangle for 12 lines ( number of letters in my name Kimia Rezvani):")
+
+    for line in name_print_pretty:
+        print(line)
+
+    print("The total time for 12 lines is :", timeit.default_timer() - starttime) #end timer
+
+
+"""
+The start time is  : 0.0597812
+
+Pascal's triangle for 0 line(s):
+[1]
+The total time for  0 line(s) is  6.769999999999693e-05
+
+Pascal's triangle for 1 line(s):
+[1]
+[1, 1]
+The total time for  1 line(s) is  0.00010670000000000124
+
+Pascal's triangle for 2 line(s):
+[1]
+[1, 1]
+[1, 2, 1]
+The total time for  2 line(s) is  0.00015010000000000023
+
+Pascal's triangle for 3 line(s):
+[1]
+[1, 1]
+[1, 2, 1]
+[1, 3, 3, 1]
+The total time for  3 line(s) is  0.0001994999999999983
+
+Pascal's triangle for 4 line(s):
+[1]
+[1, 1]
+[1, 2, 1]
+[1, 3, 3, 1]
+[1, 4, 6, 4, 1]
+The total time for  4 line(s) is  0.00025460000000000066
+
+Pascal's triangle for 5 line(s):
+[1]
+[1, 1]
+[1, 2, 1]
+[1, 3, 3, 1]
+[1, 4, 6, 4, 1]
+[1, 5, 10, 10, 5, 1]
+The total time for  5 line(s) is  0.0003178
+
+Pascal's triangle for 6 line(s):
+[1]
+[1, 1]
+[1, 2, 1]
+[1, 3, 3, 1]
+[1, 4, 6, 4, 1]
+[1, 5, 10, 10, 5, 1]
+[1, 6, 15, 20, 15, 6, 1]
+The total time for  6 line(s) is  0.0003898999999999986
+
+The start time is for 12 lines: 0.060183
+
+Pascal's triangle for 12 lines ( number of letters in my name Kimia Rezvani):
+[1]
+[1, 1]
+[1, 2, 1]
+[1, 3, 3, 1]
+[1, 4, 6, 4, 1]
+[1, 5, 10, 10, 5, 1]
+[1, 6, 15, 20, 15, 6, 1]
+[1, 7, 21, 35, 35, 21, 7, 1]
+[1, 8, 28, 56, 70, 56, 28, 8, 1]
+[1, 9, 36, 84, 126, 126, 84, 36, 9, 1]
+[1, 10, 45, 120, 210, 252, 210, 120, 45, 10, 1]
+[1, 11, 55, 165, 330, 462, 462, 330, 165, 55, 11, 1]
+[1, 12, 66, 220, 495, 792, 924, 792, 495, 220, 66, 12, 1]
+The total time for 12 lines is : 0.0002100999999999978
+
+Process finished with exit code 0
+
+
+
+"""
+
+
+
+
